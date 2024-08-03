@@ -95,4 +95,27 @@ public class EventControllerTests {
         ;
     }
 
+    @Test
+    public void createEvent_bad_request_wrong_input() throws Exception{
+
+        EventDto eventDto = EventDto.builder()
+                .name("SpringTest")
+                .description("REST API")
+                .basePrice(10000)
+                .maxPrice(200)
+                .limitOfEnrollment(100)
+                .location("Daegu")
+                .build();
+
+        mockMvc.perform(post("/api/events/")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .accept(MediaTypes.HAL_JSON)
+                        .content(objectMapper.writeValueAsString(eventDto))
+                )
+                .andDo(print())
+                .andExpect(status().isBadRequest())
+
+        ;
+    }
+
 }
