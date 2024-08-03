@@ -114,6 +114,9 @@ public class EventControllerTests {
                 )
                 .andDo(print())
                 .andExpect(status().isBadRequest())
+                .andExpect(jsonPath("$[0].objectName").exists())
+                .andExpect(jsonPath("$[0].defaultMessage").exists())
+
 
         ;
     }
